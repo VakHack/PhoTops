@@ -6,11 +6,11 @@ import android.view.View;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.photops.Models.AppDB;
+import com.example.photops.Models.ActivePhotoHandler;
 import com.example.photops.Models.Networking.PhotosGetter;
 import com.example.photops.Models.Networking.UnsplashClientHandler;
 import com.example.photops.Models.Photo;
-import com.example.photops.Models.SharedPrefsAppDB;
+import com.example.photops.Models.SharedPrefsActivePhotoHandler;
 import com.example.photops.R;
 import com.example.photops.Views.PhotosAdapter;
 import com.example.photops.Views.RecyclerViewScroller;
@@ -23,27 +23,24 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MultiPhotoPresenter {
-    private int page = 1;
-
     private PhotosAdapter adapter;
     private PhotosAdapter.OnPhotoClickedListener photoClickListener;
     private PhotosGetter dataService;
     private RecyclerView recyclerView;
+    private int page = 1;
 
-    private View root;
     private Context context;
-    private AppDB appDB;
+    private ActivePhotoHandler activePhotoHandler;
 
     private FragmentSwapper swapper;
 
     public MultiPhotoPresenter(Context context, FragmentSwapper swapper) {
         this.context = context;
         this.swapper = swapper;
-        appDB = new SharedPrefsAppDB(context);
+        activePhotoHandler = new SharedPrefsActivePhotoHandler(context);
     }
 
     public void setView(View root){
-        this.root = root;
         recyclerView = root.findViewById(R.id.recyclerView);
     }
 
@@ -60,7 +57,6 @@ public class MultiPhotoPresenter {
 
                 @Override
                 public void onFailure(Call<List<Photo>> call, Throwable t) {
-
                 }
             });
 
@@ -70,11 +66,12 @@ public class MultiPhotoPresenter {
     public void present(){
         dataService = UnsplashClientHandler.getUnsplashClient().create(PhotosGetter.class);
         photoClickListener = (photo, imageView) -> {
-            appDB.setActivePhoto(photo);
+            activePhotoHandler.setActivePhoto(photo);
             swapper.swap();
         };
 
         GridLayoutManager layoutManager = new GridLayoutManager(context, 2);
+
         recyclerView.setLayoutManager(layoutManager);
         adapter = new PhotosAdapter(new ArrayList<>(), context, photoClickListener);
         recyclerView.setAdapter(adapter);

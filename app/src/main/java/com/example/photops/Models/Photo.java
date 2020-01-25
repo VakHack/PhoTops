@@ -11,9 +11,6 @@ public class Photo implements Serializable {
         this.urls = urls;
     }
 
-    public Photo() {
-    }
-
     public Urls getUrls() {
         return urls;
     }
