@@ -7,11 +7,10 @@ import android.widget.ImageView;
 
 import com.example.photops.Models.AppDB;
 import com.example.photops.Models.SharedPrefsAppDB;
-import com.example.photops.Models.StateChangeActionHandler;
 import com.example.photops.R;
 import com.squareup.picasso.Picasso;
 
-public class SinglePhotoPresenter implements StateChangeActionHandler{
+public class SinglePhotoPresenter {
     private ImageView imageView;
     private Context context;
     private AppDB appDB;
@@ -22,16 +21,11 @@ public class SinglePhotoPresenter implements StateChangeActionHandler{
     }
 
     public void setView(View root){
-        imageView = root.findViewById(R.id.singlePhoto);
+        imageView = root.findViewById(R.id.photoView);
     }
 
     public void present(){
-        appDB.waitOnAppState(this);
-    }
-
-    @Override
-    public void performOnStateChange() {
-        Log.e("test", appDB.getActivePhoto()+"");
+        Log.e("test", "here");
 
         Picasso.with(context)
                 .load(appDB.getActivePhoto().getUrls().getFull())

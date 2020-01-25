@@ -10,8 +10,5 @@ public abstract class AppDB {
     }
 
     public abstract void setActivePhoto(Photo photo);
-    public abstract void setAppState(String state);
-    public abstract String getAppState();
-    public abstract void waitOnAppState(StateChangeActionHandler actionHandler);
     public abstract Photo getActivePhoto();
 }

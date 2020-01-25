@@ -1,7 +1,6 @@
 package com.example.photops.Presenters;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -25,16 +24,21 @@ import retrofit2.Response;
 
 public class MultiPhotoPresenter {
     private int page = 1;
+
     private PhotosAdapter adapter;
     private PhotosAdapter.OnPhotoClickedListener photoClickListener;
     private PhotosGetter dataService;
     private RecyclerView recyclerView;
+
     private View root;
     private Context context;
     private AppDB appDB;
 
-    public MultiPhotoPresenter(Context context) {
+    private FragmentSwapper swapper;
+
+    public MultiPhotoPresenter(Context context, FragmentSwapper swapper) {
         this.context = context;
+        this.swapper = swapper;
         appDB = new SharedPrefsAppDB(context);
     }
 
@@ -67,10 +71,7 @@ public class MultiPhotoPresenter {
         dataService = UnsplashClientHandler.getUnsplashClient().create(PhotosGetter.class);
         photoClickListener = (photo, imageView) -> {
             appDB.setActivePhoto(photo);
-            appDB.setAppState(PresentersSignature.SINGLE_PHOTO.toString());
-
-            PresentersSwapper presentersSwapper = new PresentersSwapper(context, root);
-            presentersSwapper.run();
+            swapper.swap();
         };
 
         GridLayoutManager layoutManager = new GridLayoutManager(context, 2);
