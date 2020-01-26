@@ -17,6 +17,7 @@ public class FragmentSwapper {
 
     public void swap(){
         FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out);
         transaction.replace(id, fragment);
         transaction.commit();
     }
