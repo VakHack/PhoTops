@@ -11,10 +11,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.photops.Presenters.FragmentSwapper;
-import com.example.photops.R;
 import com.example.photops.Presenters.SinglePhoto.SinglePhotoFragment;
+import com.example.photops.R;
 
-public class MultiPhotoFragment extends Fragment {
+public class MultiPhotoFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {

@@ -12,13 +12,14 @@ public class UnsplashClientHandler {
     public static Retrofit getUnsplashClient() {
         if (retrofit == null) {
             OkHttpClient client = new OkHttpClient.Builder()
-                    .addInterceptor(new RequestHandler(UNSPLASH_ACCESS_KEY)).build();
+                    .addInterceptor(new HeaderHandler(UNSPLASH_ACCESS_KEY)).build();
             retrofit = new Retrofit.Builder()
                     .baseUrl(UNSPLASH_URL_PREFIX)
                     .client(client)
                     .addConverterFactory(GsonConverterFactory.create())
                     .build();
         }
+
         return retrofit;
     }
 }

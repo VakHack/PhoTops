@@ -2,15 +2,20 @@ package com.example.photops.Data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.util.Log;
 
-import com.example.photops.Network.Urls;
+import com.example.photops.Network.Serializers.User;
+import com.example.photops.Network.Serializers.Urls;
+import com.google.gson.Gson;
 
 public class SharedPrefsStorage extends Storage {
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
+    Gson gson = new Gson();
 
-    private String APP_KEY = "photops";
-    private String ACTIVE_PHOTO_KEY = "active_photo";
+    private final String APP_KEY = "photops";
+    private final String PHOTO_KEY = "photo";
+    private final String IS_PHOTO_LIKED_KEY = "liked_";
 
     public SharedPrefsStorage(Context context) {
         super(context);
@@ -19,27 +24,30 @@ public class SharedPrefsStorage extends Storage {
 
     @Override
     public void setActivePhoto(Photo photo) {
+        String strPhoto = gson.toJson(photo);
+
         editor = sharedPref.edit();
-        editor.putString(ACTIVE_PHOTO_KEY, photo.getUrls().getFull());
+        editor.putString(PHOTO_KEY, strPhoto);
         editor.apply();
     }
 
     @Override
     public Photo getActivePhoto() {
-        Urls urls = new Urls();
-        urls.setFull(sharedPref.getString(ACTIVE_PHOTO_KEY, "empty"));
-        return new Photo(urls);
+        String strPhoto = sharedPref.getString(PHOTO_KEY, "");
+        return gson.fromJson(strPhoto, Photo.class);
     }
 
     @Override
     public void toggleLikePhoto(Photo photo) {
         editor = sharedPref.edit();
-        editor.putBoolean(getActivePhoto().getUrls().getFull(), !isPhotoLiked(photo));
+        editor.putBoolean(IS_PHOTO_LIKED_KEY + getActivePhoto().getUrls().getFull()
+                , !isPhotoLiked(photo));
         editor.apply();
     }
 
     @Override
     public boolean isPhotoLiked(Photo photo) {
-        return sharedPref.getBoolean(photo.getUrls().getFull(), false);
+        return sharedPref.getBoolean(IS_PHOTO_LIKED_KEY + photo.getUrls().getFull()
+                , false);
     }
 }

@@ -13,6 +13,7 @@ import com.example.photops.Network.UnsplashClientHandler;
 import com.example.photops.Data.Photo;
 import com.example.photops.Data.SharedPrefsStorage;
 import com.example.photops.Presenters.FragmentSwapper;
+import com.example.photops.Presenters.PhotoPresenter;
 import com.example.photops.R;
 import com.example.photops.UI.PhotoAdapter;
 import com.example.photops.UI.RecyclerViewScroller;
@@ -24,18 +25,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MultiPhotoPresenter {
+public class MultiPhotoPresenter implements PhotoPresenter {
     private PhotoAdapter adapter;
     private PhotoAdapter.OnPhotoClickedListener photoClickListener;
     private RecyclerView recyclerView;
     private int page = 1;
-
+    private FragmentSwapper swapper;
     private PhotosGetter dataService;
-
     private Context context;
     private Storage storage;
 
-    private FragmentSwapper swapper;
 
     public MultiPhotoPresenter(Context context, FragmentSwapper swapper) {
         this.context = context;
@@ -43,11 +42,12 @@ public class MultiPhotoPresenter {
         storage = new SharedPrefsStorage(context);
     }
 
+    @Override
     public void setView(View root){
         recyclerView = root.findViewById(R.id.recyclerView);
     }
 
-
+    @Override
     public void present(){
         dataService = UnsplashClientHandler.getUnsplashClient().create(PhotosGetter.class);
 

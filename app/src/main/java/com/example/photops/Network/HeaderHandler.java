@@ -5,10 +5,10 @@ import okhttp3.Interceptor;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class RequestHandler implements Interceptor {
+public class HeaderHandler implements Interceptor {
     private String clientId;
 
-    public RequestHandler(String clientId) {
+    public HeaderHandler(String clientId) {
         this.clientId = clientId;
     }
     @Override public Response intercept(Interceptor.Chain chain) throws IOException {

@@ -1,4 +1,4 @@
-package com.example.photops.Network;
+package com.example.photops.Network.Serializers;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
@@ -15,7 +15,6 @@ public class Urls {
     public String getFull() {
         return full;
     }
-
     public void setFull(String full) {
         this.full = full;
     }
@@ -23,7 +22,6 @@ public class Urls {
     public String getRegular() {
         return regular;
     }
-
     public void setRegular(String regular) {
         this.regular = regular;
     }

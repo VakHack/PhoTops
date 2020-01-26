@@ -1,20 +1,22 @@
 package com.example.photops.Presenters.SinglePhoto;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 import com.example.photops.Data.Storage;
 import com.example.photops.Data.SharedPrefsStorage;
+import com.example.photops.Presenters.PhotoPresenter;
 import com.example.photops.R;
 import com.squareup.picasso.Picasso;
 
-public class SinglePhotoPresenter {
+public class SinglePhotoPresenter implements PhotoPresenter {
     private ImageView imageView;
     private Context context;
     private Storage storage;
-    ImageButton likeButton;
+    private ImageButton likeButton;
 
 
     public SinglePhotoPresenter(Context context) {
@@ -22,6 +24,7 @@ public class SinglePhotoPresenter {
         storage = new SharedPrefsStorage(context);
     }
 
+    @Override
     public void setView(View root){
         imageView = root.findViewById(R.id.photoView);
         likeButton = root.findViewById(R.id.likeButton);
@@ -33,6 +36,7 @@ public class SinglePhotoPresenter {
         likeButton.setOnClickListener(v -> toggleLike());
     }
 
+    @Override
     public void present(){
         Picasso.with(context)
                 .load(storage.getActivePhoto().getUrls().getFull())
@@ -42,8 +46,8 @@ public class SinglePhotoPresenter {
     public void toggleLike(){
         storage.toggleLikePhoto(storage.getActivePhoto());
 
-        boolean isActivePhotoLike = storage.isPhotoLiked(storage.getActivePhoto());
-        if(isActivePhotoLike){
+        boolean isActivePhotoLiked = storage.isPhotoLiked(storage.getActivePhoto());
+        if(isActivePhotoLiked){
             likeButton.setImageResource(R.drawable.large_like_full);
         } else {
             likeButton.setImageResource(R.drawable.large_like_empty);

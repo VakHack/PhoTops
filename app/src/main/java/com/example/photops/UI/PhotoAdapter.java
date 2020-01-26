@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -21,6 +22,21 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
     private OnPhotoClickedListener listener;
     private Storage storage;
 
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        final ImageView gridPhoto;
+        final ImageView likeIndicator;
+        final TextView numOfLikes;
+        final TextView photoBy;
+
+        public ViewHolder(View view) {
+            super(view);
+            gridPhoto = view.findViewById(R.id.gridImage);
+            likeIndicator =  view.findViewById(R.id.likeIndicator);
+            numOfLikes =  view.findViewById(R.id.numOfLikes);
+            photoBy =  view.findViewById(R.id.photoBy);
+        }
+    }
+
     public PhotoAdapter(List<Photo> photos, Context context,
                         OnPhotoClickedListener listener, Storage storage) {
         this.photos = photos;
@@ -35,8 +51,14 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         Photo photo = photos.get(position);
         holder.gridPhoto.setOnClickListener(v -> listener.photoClicked(photos.get(holder.getAdapterPosition()),(ImageView)v));
 
+        //setting the descriptive text relevant to the photo
+        String likeNumText = "Likes: " + photo.getUser().getLikes();
+        holder.numOfLikes.setText(likeNumText);
+        String byText = "By: " + photo.getUser().getUsername();
+        holder.photoBy.setText(byText);
+
         //adding color to the "like" indicator, in case it was liked by the user
-        if(storage.isPhotoLiked(photos.get(holder.getAdapterPosition())))
+        if(storage.isPhotoLiked(photo))
             holder.likeIndicator.setImageResource(R.drawable.like_full);
 
         //calling the relevant view with picasso
@@ -62,17 +84,6 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
     @Override
     public int getItemCount() {
         return photos.size();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public final ImageView gridPhoto;
-        public final ImageView likeIndicator;
-
-        public ViewHolder(View view) {
-            super(view);
-            gridPhoto = view.findViewById(R.id.gridImage);
-            likeIndicator =  view.findViewById(R.id.likeIndicator);
-        }
     }
 
     public interface OnPhotoClickedListener {
