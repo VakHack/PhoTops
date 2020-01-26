@@ -1,4 +1,4 @@
-package com.example.photops.Views;
+package com.example.photops.Presenters.MultiPhoto;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.photops.Presenters.FragmentSwapper;
-import com.example.photops.Presenters.MultiPhotoPresenter;
 import com.example.photops.R;
+import com.example.photops.Presenters.SinglePhoto.SinglePhotoFragment;
 
 public class MultiPhotoFragment extends Fragment {
     @Nullable

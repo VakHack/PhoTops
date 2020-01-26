@@ -1,7 +1,4 @@
 package com.example.photops.Presenters;
-
-import android.util.Log;
-
 import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentManager;

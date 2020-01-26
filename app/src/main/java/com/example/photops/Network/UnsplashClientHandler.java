@@ -1,4 +1,4 @@
-package com.example.photops.Models.Networking;
+package com.example.photops.Network;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
@@ -12,7 +12,7 @@ public class UnsplashClientHandler {
     public static Retrofit getUnsplashClient() {
         if (retrofit == null) {
             OkHttpClient client = new OkHttpClient.Builder()
-                    .addInterceptor(new HeaderInterceptor(UNSPLASH_ACCESS_KEY)).build();
+                    .addInterceptor(new RequestHandler(UNSPLASH_ACCESS_KEY)).build();
             retrofit = new Retrofit.Builder()
                     .baseUrl(UNSPLASH_URL_PREFIX)
                     .client(client)

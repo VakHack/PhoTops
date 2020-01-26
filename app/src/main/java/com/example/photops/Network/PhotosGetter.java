@@ -1,6 +1,6 @@
-package com.example.photops.Models.Networking;
+package com.example.photops.Network;
 
-import com.example.photops.Models.Photo;
+import com.example.photops.Data.Photo;
 
 import java.util.List;
 

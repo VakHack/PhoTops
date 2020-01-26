@@ -1,6 +1,6 @@
-package com.example.photops.Models;
+package com.example.photops.Data;
 
-import com.example.photops.Models.Networking.Urls;
+import com.example.photops.Network.Urls;
 
 import java.io.Serializable;
 

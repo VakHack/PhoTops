@@ -1,4 +1,4 @@
-package com.example.photops.Models.Networking;
+package com.example.photops.Network;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

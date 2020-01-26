@@ -5,9 +5,20 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/imgview"
+        android:id="@+id/gridImage"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+
+    <ImageView
+        android:id="@+id/likeIndicator"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:src="@drawable/like_empty"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="2dp"
+    />
 
 </RelativeLayout>

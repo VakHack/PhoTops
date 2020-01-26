@@ -1,18 +1,18 @@
-package com.example.photops.Models;
+package com.example.photops.Data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.photops.Models.Networking.Urls;
+import com.example.photops.Network.Urls;
 
-public class SharedPrefsActivePhotoHandler extends ActivePhotoHandler {
+public class SharedPrefsStorage extends Storage {
     private SharedPreferences sharedPref;
     private SharedPreferences.Editor editor;
 
     private String APP_KEY = "photops";
     private String ACTIVE_PHOTO_KEY = "active_photo";
 
-    public SharedPrefsActivePhotoHandler(Context context) {
+    public SharedPrefsStorage(Context context) {
         super(context);
         sharedPref = context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE);
     }
@@ -26,20 +26,20 @@ public class SharedPrefsActivePhotoHandler extends ActivePhotoHandler {
 
     @Override
     public Photo getActivePhoto() {
-        Urls url = new Urls();
-        url.setFull(sharedPref.getString(ACTIVE_PHOTO_KEY, "empty"));
-        return new Photo(url);
+        Urls urls = new Urls();
+        urls.setFull(sharedPref.getString(ACTIVE_PHOTO_KEY, "empty"));
+        return new Photo(urls);
     }
 
     @Override
-    public void likePhoto() {
+    public void toggleLikePhoto(Photo photo) {
         editor = sharedPref.edit();
-        editor.putBoolean(getActivePhoto().getUrls().getFull(), true);
+        editor.putBoolean(getActivePhoto().getUrls().getFull(), !isPhotoLiked(photo));
         editor.apply();
     }
 
     @Override
-    public boolean isPhotoLiked() {
-        return sharedPref.getBoolean(getActivePhoto().getUrls().getFull(), false);
+    public boolean isPhotoLiked(Photo photo) {
+        return sharedPref.getBoolean(photo.getUrls().getFull(), false);
     }
 }
