@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.photops.Presenters.MultiPhoto.MultiPhotoPresenter;
+import com.example.photops.Presenters.PresenterInitializer;
 import com.example.photops.R;
 
 public class SinglePhotoFragment extends Fragment {
@@ -19,8 +20,8 @@ public class SinglePhotoFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.single_photo_layout, container, false);
 
-        SinglePhotoPresenter singlePhotoPresenter = (SinglePhotoPresenter) getArguments()
-                .getSerializable("SinglePresenter");
+        PresenterInitializer initializer = new PresenterInitializer(getContext(), getFragmentManager(), false);
+        SinglePhotoPresenter singlePhotoPresenter = (SinglePhotoPresenter) initializer.init();
         singlePhotoPresenter.setView(root);
         singlePhotoPresenter.present();
 
