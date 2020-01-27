@@ -1,7 +1,6 @@
 package com.example.photops.Presenters.MultiPhoto;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -11,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.photops.Data.Photo.Item;
 import com.example.photops.Data.Photo.ItemsList;
 import com.example.photops.Data.Storage.Storage;
-import com.example.photops.Network.PhotosGetter;
-import com.example.photops.Network.RetrofitClientHandler;
+import com.example.photops.Network.ItemsGetter;
 import com.example.photops.Data.Storage.SharedPrefsStorage;
-import com.example.photops.Presenters.FragmentSwapper;
+import com.example.photops.Network.Networker;
+import com.example.photops.UI.FragmentSwapper;
 import com.example.photops.Presenters.PhotoPresenter;
 import com.example.photops.R;
 import com.example.photops.UI.PhotoAdapter;
@@ -27,21 +26,16 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MultiPhotoPresenter implements PhotoPresenter {
+public class MultiPhotoPresenter extends PhotoPresenter {
     private PhotoAdapter adapter;
     private PhotoAdapter.OnPhotoClickedListener photoClickListener;
     private RecyclerView recyclerView;
     private int page = 1;
-    private FragmentSwapper swapper;
-    private PhotosGetter photosGetter;
-    private Context context;
-    private Storage storage;
+    private ItemsGetter itemsGetter;
 
-
-    public MultiPhotoPresenter(Context context, FragmentSwapper swapper) {
-        this.context = context;
-        this.swapper = swapper;
-        storage = new SharedPrefsStorage(context);
+    public MultiPhotoPresenter(Context context, FragmentSwapper swapper,
+                               Networker networker, Storage storage) {
+        super(context, swapper, networker, storage);
     }
 
     @Override
@@ -51,7 +45,7 @@ public class MultiPhotoPresenter implements PhotoPresenter {
 
     @Override
     public void present(){
-        photosGetter = RetrofitClientHandler.getClient().create(PhotosGetter.class);
+        itemsGetter = networker.getClient().create(ItemsGetter.class);
 
         photoClickListener = (photo, imageView) -> {
             storage.setActivePhoto(photo);
@@ -62,6 +56,7 @@ public class MultiPhotoPresenter implements PhotoPresenter {
         recyclerView.setLayoutManager(layoutManager);
         adapter = new PhotoAdapter(new ArrayList<>(), context, photoClickListener, new SharedPrefsStorage(context));
         recyclerView.setAdapter(adapter);
+        recyclerView.smoothScrollToPosition(0);
 
         recyclerView.addOnScrollListener(new RecyclerViewScroller(layoutManager) {
             @Override
@@ -74,7 +69,7 @@ public class MultiPhotoPresenter implements PhotoPresenter {
     }
 
     private void loadPhotos() {
-        photosGetter.getPhotos()
+        itemsGetter.getItems()
             .enqueue(new Callback<ItemsList>() {
                 @Override
                 public void onResponse(Call<ItemsList> call, Response<ItemsList> response) {

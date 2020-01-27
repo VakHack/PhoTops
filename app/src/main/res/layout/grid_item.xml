@@ -15,7 +15,7 @@
     <ProgressBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="70dp"
         android:id="@+id/gridProgressBar"
         android:layout_centerHorizontal="true"
         android:theme="@style/AppTheme.WhiteAccent" />
@@ -24,7 +24,7 @@
         android:id="@+id/photoBy"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="60dp"
         android:padding="5dp"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif-black"

@@ -1,4 +1,4 @@
-package com.example.photops.Presenters;
+package com.example.photops.UI;
 import androidx.fragment.app.Fragment;
 
 import androidx.fragment.app.FragmentManager;

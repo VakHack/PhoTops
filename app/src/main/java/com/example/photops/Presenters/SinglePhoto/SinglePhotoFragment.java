@@ -9,17 +9,18 @@ import android.widget.ImageButton;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+
+import com.example.photops.Presenters.MultiPhoto.MultiPhotoPresenter;
 import com.example.photops.R;
 
 public class SinglePhotoFragment extends Fragment {
-    private SinglePhotoPresenter singlePhotoPresenter;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.single_photo_layout, container, false);
 
-        singlePhotoPresenter = new SinglePhotoPresenter(getActivity());
+        SinglePhotoPresenter singlePhotoPresenter = (SinglePhotoPresenter) getArguments()
+                .getSerializable("SinglePresenter");
         singlePhotoPresenter.setView(root);
         singlePhotoPresenter.present();
 

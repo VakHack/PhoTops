@@ -1,6 +1,8 @@
 package com.example.photops.UI;
 
+import android.app.Activity;
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,6 +26,15 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
     private Context context;
     private OnPhotoClickedListener listener;
     private Storage storage;
+    private final int HOLDER_HEIGHT = 500;
+
+    public PhotoAdapter(List<Item> photos, Context context,
+                        OnPhotoClickedListener listener, Storage storage) {
+        this.photos = photos;
+        this.context = context;
+        this.listener = listener;
+        this.storage = storage;
+    }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         final ImageView gridImage;
@@ -35,6 +46,8 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         public ViewHolder(View view) {
             super(view);
             gridImage = view.findViewById(R.id.gridImage);
+            gridImage.getLayoutParams().height = HOLDER_HEIGHT;
+
             likeIndicator =  view.findViewById(R.id.likeIndicator);
             numOfLikes =  view.findViewById(R.id.numOfLikes);
             photoBy =  view.findViewById(R.id.photoBy);
@@ -42,28 +55,28 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         }
     }
 
-    public PhotoAdapter(List<Item> photos, Context context,
-                        OnPhotoClickedListener listener, Storage storage) {
-        this.photos = photos;
-        this.context = context;
-        this.listener = listener;
-        this.storage = storage;
-    }
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        final int HOLDER_WIDTH = 300;
-        final int HOLDER_HEIGHT = 400;
-
         //positioning the bounded photo
         Item photo = photos.get(position);
         holder.gridImage.setOnClickListener(v ->
                 listener.photoClicked(photos.get(holder.getAdapterPosition()),(ImageView)v));
 
+        //setting the picture width parameter, so we could cut the picture on picasso
+        //accordingly - in order to get a faster downloading
+        //(the height is a hard-coded size)
+        DisplayMetrics displaymetrics = new DisplayMetrics();
+        ((Activity)context)
+                .getWindowManager()
+                .getDefaultDisplay()
+                .getMetrics(displaymetrics);
+        int holderWidth = displaymetrics.widthPixels;
+
         //calling the relevant photo into the view with picasso
         Picasso.with(context)
                 .load(PhotoUrlBuilder.build(photo))
-                .resize(HOLDER_WIDTH, HOLDER_HEIGHT)
+                .resize(holderWidth, HOLDER_HEIGHT)
                 .centerCrop()
                 .into(holder.gridImage, new com.squareup.picasso.Callback() {
                     @Override
@@ -105,7 +118,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
     }
 
     private void loadPhotoDetails(ViewHolder holder, Item photo){
-        //setting the descriptive text relevant to the photo
+        //setting the descriptive texts that relevant to the photo
         String likeNumText = "Likes: " + photo.getLikes();
         holder.numOfLikes.setVisibility(View.VISIBLE);
         holder.numOfLikes.setText(likeNumText);

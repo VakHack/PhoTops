@@ -11,21 +11,20 @@ import android.widget.Toast;
 import com.example.photops.Data.Photo.PhotoUrlBuilder;
 import com.example.photops.Data.Storage.SharedPrefsStorage;
 import com.example.photops.Data.Storage.Storage;
+import com.example.photops.Network.Networker;
 import com.example.photops.Presenters.PhotoPresenter;
 import com.example.photops.R;
+import com.example.photops.UI.FragmentSwapper;
 import com.squareup.picasso.Picasso;
 
-public class SinglePhotoPresenter implements PhotoPresenter {
+public class SinglePhotoPresenter extends PhotoPresenter {
     private ImageView image;
-    private Context context;
-    private Storage storage;
     private ImageButton likeButton;
     private ProgressBar progressBar;
 
-
-    public SinglePhotoPresenter(Context context) {
-        this.context = context;
-        storage = new SharedPrefsStorage(context);
+    public SinglePhotoPresenter(Context context, FragmentSwapper swapper,
+                                Networker networker, Storage storage) {
+        super(context, swapper, networker, storage);
     }
 
     @Override
@@ -34,6 +33,7 @@ public class SinglePhotoPresenter implements PhotoPresenter {
         likeButton = root.findViewById(R.id.likeButton);
         progressBar = root.findViewById(R.id.progressBar);
 
+        //setting like indicator to be full, in case the user like the current photo
         if(storage.isPhotoLiked(storage.getActivePhoto())){
             likeButton.setImageResource(R.drawable.large_like_full);
         }
