@@ -6,10 +6,10 @@ import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.photops.Data.Storage.SharedPrefsStorage;
-import com.example.photops.Data.Storage.Storage;
-import com.example.photops.Network.APIParams;
-import com.example.photops.Network.NetworkCoordinator;
+import com.example.photops.Models.Storage.SharedPrefsStorage;
+import com.example.photops.Models.Storage.Storage;
+import com.example.photops.Models.Network.APIParams;
+import com.example.photops.Models.Network.NetworkCoordinator;
 import com.example.photops.Presenters.MultiPhoto.MultiPhotoFragment;
 import com.example.photops.Presenters.MultiPhoto.MultiPhotoPresenter;
 import com.example.photops.Presenters.PhotoPresenter;

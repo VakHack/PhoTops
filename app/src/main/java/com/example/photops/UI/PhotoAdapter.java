@@ -13,9 +13,9 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.photops.Data.Photo.Item;
-import com.example.photops.Data.Photo.PhotoUrlBuilder;
-import com.example.photops.Data.Storage.Storage;
+import com.example.photops.Models.Photo.Item;
+import com.example.photops.Models.Photo.PhotoUrlBuilder;
+import com.example.photops.Models.Storage.Storage;
 import com.example.photops.R;
 import com.squareup.picasso.Picasso;
 

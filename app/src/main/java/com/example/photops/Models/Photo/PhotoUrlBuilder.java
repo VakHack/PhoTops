@@ -1,4 +1,4 @@
-package com.example.photops.Data.Photo;
+package com.example.photops.Models.Photo;
 
 public class PhotoUrlBuilder {
     public static final String PICS_URL_PREFIX = "https://photos.gurushots.com/unsafe/";

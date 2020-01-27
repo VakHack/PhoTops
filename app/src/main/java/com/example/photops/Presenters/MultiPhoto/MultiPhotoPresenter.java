@@ -7,12 +7,12 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.photops.Data.Photo.Item;
-import com.example.photops.Data.Photo.ItemsList;
-import com.example.photops.Data.Storage.Storage;
-import com.example.photops.Network.ItemsGetter;
-import com.example.photops.Data.Storage.SharedPrefsStorage;
-import com.example.photops.Network.NetworkCoordinator;
+import com.example.photops.Models.Photo.Item;
+import com.example.photops.Models.Photo.ItemsList;
+import com.example.photops.Models.Storage.Storage;
+import com.example.photops.Models.Network.ItemsGetter;
+import com.example.photops.Models.Storage.SharedPrefsStorage;
+import com.example.photops.Models.Network.NetworkCoordinator;
 import com.example.photops.UI.FragmentSwapper;
 import com.example.photops.Presenters.PhotoPresenter;
 import com.example.photops.R;

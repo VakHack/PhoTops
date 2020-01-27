@@ -8,9 +8,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.photops.Data.Photo.PhotoUrlBuilder;
-import com.example.photops.Data.Storage.Storage;
-import com.example.photops.Network.NetworkCoordinator;
+import com.example.photops.Models.Photo.PhotoUrlBuilder;
+import com.example.photops.Models.Storage.Storage;
+import com.example.photops.Models.Network.NetworkCoordinator;
 import com.example.photops.Presenters.PhotoPresenter;
 import com.example.photops.R;
 import com.example.photops.UI.FragmentSwapper;

@@ -1,8 +1,8 @@
-package com.example.photops.Data.Storage;
+package com.example.photops.Models.Storage;
 
 import android.content.Context;
 
-import com.example.photops.Data.Photo.Item;
+import com.example.photops.Models.Photo.Item;
 
 //separating between the current implementation (shared prefs) to its interface
 public abstract class Storage {

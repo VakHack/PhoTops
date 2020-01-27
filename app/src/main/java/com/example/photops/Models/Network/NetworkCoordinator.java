@@ -1,4 +1,4 @@
-package com.example.photops.Network;
+package com.example.photops.Models.Network;
 
 import retrofit2.Retrofit;
 

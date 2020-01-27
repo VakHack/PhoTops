@@ -1,4 +1,4 @@
-package com.example.photops.Data.Photo;
+package com.example.photops.Models.Photo;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;

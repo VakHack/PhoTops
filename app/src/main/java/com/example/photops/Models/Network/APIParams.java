@@ -1,4 +1,4 @@
-package com.example.photops.Network;
+package com.example.photops.Models.Network;
 
 public class APIParams {
     private String requestMethod;
