@@ -10,8 +10,8 @@ public abstract class Storage {
         this.context = context;
     }
 
-    public abstract void setActivePhoto(Photo photo);
-    public abstract Photo getActivePhoto();
-    public abstract void toggleLikePhoto(Photo photo);
-    public abstract boolean isPhotoLiked(Photo photo);
+    public abstract void setActivePhoto(Item photo);
+    public abstract Item getActivePhoto();
+    public abstract void toggleLikePhoto(Item photo);
+    public abstract boolean isPhotoLiked(Item photo);
 }

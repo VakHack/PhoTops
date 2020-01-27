@@ -2,10 +2,7 @@ package com.example.photops.Data;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.util.Log;
 
-import com.example.photops.Network.Serializers.User;
-import com.example.photops.Network.Serializers.Urls;
 import com.google.gson.Gson;
 
 public class SharedPrefsStorage extends Storage {
@@ -23,7 +20,7 @@ public class SharedPrefsStorage extends Storage {
     }
 
     @Override
-    public void setActivePhoto(Photo photo) {
+    public void setActivePhoto(Item photo) {
         String strPhoto = gson.toJson(photo);
 
         editor = sharedPref.edit();
@@ -32,22 +29,22 @@ public class SharedPrefsStorage extends Storage {
     }
 
     @Override
-    public Photo getActivePhoto() {
+    public Item getActivePhoto() {
         String strPhoto = sharedPref.getString(PHOTO_KEY, "");
-        return gson.fromJson(strPhoto, Photo.class);
+        return gson.fromJson(strPhoto, Item.class);
     }
 
     @Override
-    public void toggleLikePhoto(Photo photo) {
+    public void toggleLikePhoto(Item photo) {
         editor = sharedPref.edit();
-        editor.putBoolean(IS_PHOTO_LIKED_KEY + getActivePhoto().getUrls().getFull()
+        editor.putBoolean(IS_PHOTO_LIKED_KEY + getActivePhoto().getId()
                 , !isPhotoLiked(photo));
         editor.apply();
     }
 
     @Override
-    public boolean isPhotoLiked(Photo photo) {
-        return sharedPref.getBoolean(IS_PHOTO_LIKED_KEY + photo.getUrls().getFull()
+    public boolean isPhotoLiked(Item photo) {
+        return sharedPref.getBoolean(IS_PHOTO_LIKED_KEY + photo.getId()
                 , false);
     }
 }

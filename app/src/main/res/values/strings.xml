@@ -1,5 +1,5 @@
 <resources>
     <string name="app_name">PhoTops</string>
-    <string name="photoBy">By:</string>
+    <string name="numOfViews">Views:</string>
     <string name="numOfLikes">Likes:</string>
 </resources>

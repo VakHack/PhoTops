@@ -5,13 +5,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 public abstract class RecyclerViewScroller extends RecyclerView.OnScrollListener {
     private int visible = 10;
-
     private int previousTotalItem = 0;
     private boolean isLoading = true;
-
     private int currentPage = 0;
     private int initialPageIndex = 0;
-
     private RecyclerView.LayoutManager recyclerLayoutManager;
 
     public RecyclerViewScroller(GridLayoutManager layoutManager) {

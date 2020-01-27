@@ -1,13 +1,14 @@
 package com.example.photops.Presenters.SinglePhoto;
 
 import android.content.Context;
-import android.util.Log;
+import android.content.res.Resources;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
-import com.example.photops.Data.Storage;
+import com.example.photops.Data.PhotoUrlBuilder;
 import com.example.photops.Data.SharedPrefsStorage;
+import com.example.photops.Data.Storage;
 import com.example.photops.Presenters.PhotoPresenter;
 import com.example.photops.R;
 import com.squareup.picasso.Picasso;
@@ -17,6 +18,7 @@ public class SinglePhotoPresenter implements PhotoPresenter {
     private Context context;
     private Storage storage;
     private ImageButton likeButton;
+    private double REQUIRED_IMG_HEIGHT = 0.5;
 
 
     public SinglePhotoPresenter(Context context) {
@@ -38,8 +40,14 @@ public class SinglePhotoPresenter implements PhotoPresenter {
 
     @Override
     public void present(){
+        int screenHeight = Resources.getSystem().getDisplayMetrics().heightPixels;
+        int screenWidth = Resources.getSystem().getDisplayMetrics().widthPixels;
+
+        //set the picture to be on N * screen height
         Picasso.with(context)
-                .load(storage.getActivePhoto().getUrls().getFull())
+                .load(PhotoUrlBuilder.build(storage.getActivePhoto()))
+                .resize(screenWidth, (int)(screenHeight * REQUIRED_IMG_HEIGHT))
+                .centerCrop()
                 .into(imageView);
     }
 

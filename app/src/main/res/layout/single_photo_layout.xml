@@ -4,23 +4,25 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#1b262c"
     tools:context=".UI.MainActivity">
 
     <ImageView
         android:id="@+id/photoView"
+        android:layout_marginTop="100dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
 
     <ImageButton
         android:id="@+id/likeButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:src="@drawable/large_like_empty"
         android:layout_alignParentBottom="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="5dp"
+        android:layout_marginBottom="20dp"
         />
 
 </RelativeLayout>

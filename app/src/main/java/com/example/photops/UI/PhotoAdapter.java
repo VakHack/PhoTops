@@ -1,6 +1,7 @@
 package com.example.photops.UI;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +10,8 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.photops.Data.Photo;
+import com.example.photops.Data.Item;
+import com.example.photops.Data.PhotoUrlBuilder;
 import com.example.photops.Data.Storage;
 import com.example.photops.R;
 import com.squareup.picasso.Picasso;
@@ -17,7 +19,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> {
-    private final List<Photo> photos;
+    private final List<Item> photos;
     private Context context;
     private OnPhotoClickedListener listener;
     private Storage storage;
@@ -37,7 +39,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
         }
     }
 
-    public PhotoAdapter(List<Photo> photos, Context context,
+    public PhotoAdapter(List<Item> photos, Context context,
                         OnPhotoClickedListener listener, Storage storage) {
         this.photos = photos;
         this.context = context;
@@ -47,14 +49,17 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
+        final int HOLDER_WIDTH = 300;
+        final int HOLDER_HEIGHT = 350;
+
         //positioning the bounded photo
-        Photo photo = photos.get(position);
+        Item photo = photos.get(position);
         holder.gridPhoto.setOnClickListener(v -> listener.photoClicked(photos.get(holder.getAdapterPosition()),(ImageView)v));
 
         //setting the descriptive text relevant to the photo
-        String likeNumText = "Likes: " + photo.getUser().getLikes();
+        String likeNumText = "Likes: " + photo.getLikes();
         holder.numOfLikes.setText(likeNumText);
-        String byText = "By: " + photo.getUser().getUsername();
+        String byText = "Views: " + photo.getViews();
         holder.photoBy.setText(byText);
 
         //adding color to the "like" indicator, in case it was liked by the user
@@ -63,19 +68,19 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
 
         //calling the relevant view with picasso
         Picasso.with(context)
-                .load(photo.getUrls().getRegular())
-                .resize(300, 300)
+                .load(PhotoUrlBuilder.build(photo))
+                .resize(HOLDER_WIDTH, HOLDER_HEIGHT)
                 .centerCrop()
                 .into(holder.gridPhoto);
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_image, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.grid_item, parent, false);
         return new ViewHolder(view);
     }
 
-    public void addPhotos(List<Photo> photos){
+    public void addPhotos(List<Item> photos){
         int lastCount = getItemCount();
         this.photos.addAll(photos);
         notifyItemRangeInserted(lastCount, photos.size());
@@ -87,6 +92,6 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
     }
 
     public interface OnPhotoClickedListener {
-        void photoClicked(Photo photo, ImageView imageView);
+        void photoClicked(Item photo, ImageView imageView);
     }
 }
