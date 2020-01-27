@@ -9,9 +9,8 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.photops.Data.Photo.PhotoUrlBuilder;
-import com.example.photops.Data.Storage.SharedPrefsStorage;
 import com.example.photops.Data.Storage.Storage;
-import com.example.photops.Network.Networker;
+import com.example.photops.Network.NetworkCoordinator;
 import com.example.photops.Presenters.PhotoPresenter;
 import com.example.photops.R;
 import com.example.photops.UI.FragmentSwapper;
@@ -23,8 +22,8 @@ public class SinglePhotoPresenter extends PhotoPresenter {
     private ProgressBar progressBar;
 
     public SinglePhotoPresenter(Context context, FragmentSwapper swapper,
-                                Networker networker, Storage storage) {
-        super(context, swapper, networker, storage);
+                                NetworkCoordinator networkCoordinator, Storage storage) {
+        super(context, swapper, networkCoordinator, storage);
     }
 
     @Override

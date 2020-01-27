@@ -12,7 +12,7 @@ import com.example.photops.Data.Photo.ItemsList;
 import com.example.photops.Data.Storage.Storage;
 import com.example.photops.Network.ItemsGetter;
 import com.example.photops.Data.Storage.SharedPrefsStorage;
-import com.example.photops.Network.Networker;
+import com.example.photops.Network.NetworkCoordinator;
 import com.example.photops.UI.FragmentSwapper;
 import com.example.photops.Presenters.PhotoPresenter;
 import com.example.photops.R;
@@ -34,8 +34,8 @@ public class MultiPhotoPresenter extends PhotoPresenter {
     private ItemsGetter itemsGetter;
 
     public MultiPhotoPresenter(Context context, FragmentSwapper swapper,
-                               Networker networker, Storage storage) {
-        super(context, swapper, networker, storage);
+                               NetworkCoordinator networkCoordinator, Storage storage) {
+        super(context, swapper, networkCoordinator, storage);
     }
 
     @Override
@@ -45,7 +45,7 @@ public class MultiPhotoPresenter extends PhotoPresenter {
 
     @Override
     public void present(){
-        itemsGetter = networker.getClient().create(ItemsGetter.class);
+        itemsGetter = networkCoordinator.getClient().create(ItemsGetter.class);
 
         photoClickListener = (photo, imageView) -> {
             storage.setActivePhoto(photo);

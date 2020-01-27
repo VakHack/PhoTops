@@ -4,7 +4,7 @@ import android.content.Context;
 import android.view.View;
 
 import com.example.photops.Data.Storage.Storage;
-import com.example.photops.Network.Networker;
+import com.example.photops.Network.NetworkCoordinator;
 import com.example.photops.UI.FragmentSwapper;
 
 import java.io.Serializable;
@@ -12,14 +12,14 @@ import java.io.Serializable;
 public abstract class PhotoPresenter implements Serializable {
     protected Context context;
     protected FragmentSwapper swapper;
-    protected Networker networker;
+    protected NetworkCoordinator networkCoordinator;
     protected Storage storage;
 
     public PhotoPresenter(Context context, FragmentSwapper swapper,
-                          Networker networker, Storage storage) {
+                          NetworkCoordinator networkCoordinator, Storage storage) {
         this.context = context;
         this.swapper = swapper;
-        this.networker = networker;
+        this.networkCoordinator = networkCoordinator;
         this.storage = storage;
     }
 
