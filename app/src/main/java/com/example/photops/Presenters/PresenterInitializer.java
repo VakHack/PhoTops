@@ -51,7 +51,7 @@ public class PresenterInitializer {
         Storage storage = new SharedPrefsStorage(context);
 
         //testing if the requested fragment is multi or single, and creating accordingly
-        Fragment fragment = isMulti ?  new SinglePhotoFragment() : new MultiPhotoFragment();
+        Fragment fragment = isMulti ? new SinglePhotoFragment() : new MultiPhotoFragment();
 
         //init swappers (swaps fragments on their activity)
         FragmentSwapper multiFragmentSwapper = new FragmentSwapper(fragment, fragmentManager, R.id.container);

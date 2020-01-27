@@ -7,9 +7,20 @@
     android:background="#1b262c"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/photoTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="30sp"
+        android:layout_marginTop="20dp"
+        android:fontFamily="serif"
+        android:text="@string/title"
+        android:textColor="@android:color/white"/>
+
     <ImageView
         android:id="@+id/photoView"
-        android:layout_centerVertical="true"
+        android:layout_marginTop="80dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -19,6 +30,44 @@
         android:id="@+id/progressBar"
         android:layout_centerInParent="true"
         android:theme="@style/AppTheme.WhiteAccent" />
+
+    <TextView
+        android:id="@+id/date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_marginBottom="5dp"
+        android:fontFamily="casual"
+        android:layout_above="@id/large_numOfViews"
+        android:text="@string/creationDate"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/large_numOfViews"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_above="@id/large_numOfLikes"
+        android:layout_marginTop="5dp"
+        android:fontFamily="casual"
+        android:text="@string/numOfViews"
+        android:textSize="20sp"
+        android:layout_marginBottom="5dp"
+        android:textColor="@android:color/white"/>
+
+    <TextView
+        android:id="@+id/large_numOfLikes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:layout_above="@id/likeButton"
+        android:layout_marginTop="5dp"
+        android:fontFamily="casual"
+        android:text="@string/numOfLikes"
+        android:layout_marginBottom="5dp"
+        android:textSize="20sp"
+        android:textColor="@android:color/white"/>
 
     <ImageButton
         android:id="@+id/likeButton"

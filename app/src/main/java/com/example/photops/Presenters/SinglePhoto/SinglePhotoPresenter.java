@@ -6,9 +6,10 @@ import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.photops.Models.Photo.PhotoUrlBuilder;
+import com.example.photops.Models.Photo.GetPhotoUrlBuilder;
 import com.example.photops.Models.Storage.Storage;
 import com.example.photops.Models.Network.NetworkCoordinator;
 import com.example.photops.Presenters.PhotoPresenter;
@@ -32,7 +33,25 @@ public class SinglePhotoPresenter extends PhotoPresenter {
         likeButton = root.findViewById(R.id.likeButton);
         progressBar = root.findViewById(R.id.progressBar);
 
-        //setting like indicator to be full, in case the user like the current photo
+        //edit photo details
+        String titleText = storage.getActivePhoto().getTitle().isEmpty()
+                ? "Untitled Photo" : storage.getActivePhoto().getTitle();
+        TextView title = root.findViewById(R.id.photoTitle);
+        title.setText(titleText);
+
+        String dateText = "Creation date: " + storage.getActivePhoto().getUploadDate();
+        TextView date = root.findViewById(R.id.date);
+        date.setText(dateText);
+
+        String viewsText = "Views: " + storage.getActivePhoto().getViews();
+        TextView views = root.findViewById(R.id.large_numOfViews);
+        views.setText(viewsText);
+
+        String likesText = "Likes: " + storage.getActivePhoto().getLikes();
+        TextView likes = root.findViewById(R.id.large_numOfLikes);
+        likes.setText(likesText);
+
+        // in case the user like the current photo - setting like indicator to be full
         if(storage.isPhotoLiked(storage.getActivePhoto())){
             likeButton.setImageResource(R.drawable.large_like_full);
         }
@@ -48,7 +67,7 @@ public class SinglePhotoPresenter extends PhotoPresenter {
 
         //set the picture to be on N * screen height
         Picasso.with(context)
-                .load(PhotoUrlBuilder.build(storage.getActivePhoto()))
+                .load(GetPhotoUrlBuilder.build(storage.getActivePhoto()))
                 .resize(screenWidth, (int)(screenHeight * REQUIRED_IMG_HEIGHT))
                 .centerCrop()
                 .into(image, new com.squareup.picasso.Callback() {

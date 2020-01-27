@@ -2,4 +2,7 @@
     <string name="app_name">PhoTops</string>
     <string name="numOfViews">Views:</string>
     <string name="numOfLikes">Likes:</string>
+    <string name="title">Title</string>
+    <string name="by">By:</string>
+    <string name="creationDate">Creation date:</string>
 </resources>

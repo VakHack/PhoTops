@@ -1,6 +1,6 @@
 package com.example.photops.Models.Photo;
 
-public class PhotoUrlBuilder {
+public class GetPhotoUrlBuilder {
     public static final String PICS_URL_PREFIX = "https://photos.gurushots.com/unsafe/";
 
     public static String build(Item photo){

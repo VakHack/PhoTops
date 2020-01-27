@@ -4,13 +4,11 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.photops.Presenters.MultiPhoto.MultiPhotoPresenter;
 import com.example.photops.Presenters.PresenterInitializer;
 import com.example.photops.R;
 

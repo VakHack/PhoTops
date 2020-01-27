@@ -14,7 +14,7 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.photops.Models.Photo.Item;
-import com.example.photops.Models.Photo.PhotoUrlBuilder;
+import com.example.photops.Models.Photo.GetPhotoUrlBuilder;
 import com.example.photops.Models.Storage.Storage;
 import com.example.photops.R;
 import com.squareup.picasso.Picasso;
@@ -75,7 +75,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
 
         //calling the relevant photo into the view with picasso
         Picasso.with(context)
-                .load(PhotoUrlBuilder.build(photo))
+                .load(GetPhotoUrlBuilder.build(photo))
                 .resize(holderWidth, HOLDER_HEIGHT)
                 .centerCrop()
                 .into(holder.gridImage, new com.squareup.picasso.Callback() {
