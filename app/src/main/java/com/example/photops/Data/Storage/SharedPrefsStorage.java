@@ -1,8 +1,9 @@
-package com.example.photops.Data;
+package com.example.photops.Data.Storage;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 
+import com.example.photops.Data.Photo.Item;
 import com.google.gson.Gson;
 
 public class SharedPrefsStorage extends Storage {

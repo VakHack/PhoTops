@@ -8,12 +8,12 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.photops.Data.Item;
-import com.example.photops.Data.PhotoList;
-import com.example.photops.Data.Storage;
+import com.example.photops.Data.Photo.Item;
+import com.example.photops.Data.Photo.ItemsList;
+import com.example.photops.Data.Storage.Storage;
 import com.example.photops.Network.PhotosGetter;
 import com.example.photops.Network.RetrofitClientHandler;
-import com.example.photops.Data.SharedPrefsStorage;
+import com.example.photops.Data.Storage.SharedPrefsStorage;
 import com.example.photops.Presenters.FragmentSwapper;
 import com.example.photops.Presenters.PhotoPresenter;
 import com.example.photops.R;
@@ -21,7 +21,6 @@ import com.example.photops.UI.PhotoAdapter;
 import com.example.photops.UI.RecyclerViewScroller;
 
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import retrofit2.Call;
@@ -76,9 +75,9 @@ public class MultiPhotoPresenter implements PhotoPresenter {
 
     private void loadPhotos() {
         photosGetter.getPhotos()
-            .enqueue(new Callback<PhotoList>() {
+            .enqueue(new Callback<ItemsList>() {
                 @Override
-                public void onResponse(Call<PhotoList> call, Response<PhotoList> response) {
+                public void onResponse(Call<ItemsList> call, Response<ItemsList> response) {
                     List<Item> photos = response.body().getItems();
                     page++;
                     adapter.addPhotos(photos);
@@ -86,11 +85,9 @@ public class MultiPhotoPresenter implements PhotoPresenter {
                 }
 
                 @Override
-                public void onFailure(Call<PhotoList> call, Throwable t) {
+                public void onFailure(Call<ItemsList> call, Throwable t) {
                     Toast.makeText(context, "Failed to fetch photos",
                             Toast.LENGTH_LONG).show();
-                    Log.e("test", "failed " + t.getMessage());
-
                 }
             });
 

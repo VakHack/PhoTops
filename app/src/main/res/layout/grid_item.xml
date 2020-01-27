@@ -2,13 +2,23 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
+    android:background="#1b262c"
     android:layout_height="wrap_content">
 
     <ImageView
         android:id="@+id/gridImage"
         android:scaleType="centerCrop"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:layout_margin="5dp"/>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:id="@+id/gridProgressBar"
+        android:layout_centerHorizontal="true"
+        android:theme="@style/AppTheme.WhiteAccent" />
 
     <TextView
         android:id="@+id/photoBy"
@@ -18,7 +28,8 @@
         android:padding="5dp"
         android:layout_centerHorizontal="true"
         android:fontFamily="sans-serif-black"
-        android:background="#60676767"
+        android:background="#70676767"
+        android:visibility="invisible"
         android:textColor="@android:color/white"
         android:text="@string/numOfViews"/>
 
@@ -30,7 +41,8 @@
         android:layout_centerHorizontal="true"
         android:padding="5dp"
         android:fontFamily="sans-serif-black"
-        android:background="#60676767"
+        android:background="#70676767"
+        android:visibility="invisible"
         android:textColor="@android:color/white"
         android:text="@string/numOfLikes"/>
 
@@ -38,11 +50,11 @@
         android:id="@+id/likeIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@android:color/transparent"
+        android:background="#70676767"
         android:src="@drawable/like_empty"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginEnd="2dp"
+        android:layout_below="@id/numOfLikes"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible"
         />
 
 </RelativeLayout>
