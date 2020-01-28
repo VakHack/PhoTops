@@ -39,7 +39,7 @@ public class SinglePhotoPresenter extends PhotoPresenter {
         TextView title = root.findViewById(R.id.photoTitle);
         title.setText(titleText);
 
-        String dateText = "Added: " + storage.getActivePhoto().getUploadDate();
+        String dateText = "Upload date: " + storage.getActivePhoto().getUploadDate();
         TextView date = root.findViewById(R.id.date);
         date.setText(dateText);
 

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#1b262c"
+    android:background="#bbe1fa"
     tools:context=".MainActivity">
 
     <TextView
@@ -12,15 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
-        android:textSize="30sp"
-        android:layout_marginTop="20dp"
-        android:fontFamily="serif"
-        android:text="@string/title"
+        android:textSize="25sp"
+        android:paddingTop="12dp"
+        android:paddingBottom="12sp"
+        android:fontFamily="cursive"
+        android:background="#1b262c"
         android:textColor="@android:color/white"/>
 
     <ImageView
         android:id="@+id/photoView"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="55dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
 
@@ -29,46 +30,55 @@
         android:layout_height="90dp"
         android:id="@+id/progressBar"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="250dp"
-        android:theme="@style/AppTheme.WhiteAccent" />
+        android:layout_marginTop="200dp"
+        android:theme="@style/AppTheme.DarkAccent" />
 
-    <TextView
-        android:id="@+id/date"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:layout_marginBottom="5dp"
-        android:fontFamily="casual"
-        android:layout_above="@id/large_numOfViews"
-        android:text="@string/creationDate"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"/>
+        android:layout_height="170dp"
+        android:layout_marginTop="420dp"
+        android:background="#3282b8">
 
-    <TextView
-        android:id="@+id/large_numOfViews"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:layout_above="@id/large_numOfLikes"
-        android:layout_marginTop="5dp"
-        android:fontFamily="casual"
-        android:text="@string/numOfViews"
-        android:textSize="20sp"
-        android:layout_marginBottom="5dp"
-        android:textColor="@android:color/white"/>
-
-    <TextView
-        android:id="@+id/large_numOfLikes"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:layout_above="@id/likeButton"
-        android:layout_marginTop="5dp"
-        android:fontFamily="casual"
-        android:text="@string/numOfLikes"
-        android:layout_marginBottom="5dp"
-        android:textSize="20sp"
-        android:textColor="@android:color/white"/>
+        <TextView
+            android:id="@+id/date"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:text="@string/creationDate"
+            android:textSize="20sp"
+            android:layout_alignParentLeft="true"
+            android:textAlignment="center"
+            android:textColor="#bbe1fa"
+            android:fontFamily="serif"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
+        <TextView
+            android:id="@+id/large_numOfViews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/date"
+            android:text="@string/numOfViews"
+            android:textSize="20sp"
+            android:fontFamily="serif"
+            android:layout_alignParentLeft="true"
+            android:textAlignment="center"
+            android:textColor="#bbe1fa"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
+        <TextView
+            android:id="@+id/large_numOfLikes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/large_numOfViews"
+            android:layout_marginTop="5dp"
+            android:text="@string/numOfLikes"
+            android:textSize="20sp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentLeft="true"
+            android:textAlignment="center"
+            android:textColor="#bbe1fa"
+            android:fontFamily="serif"
+            tools:ignore="RtlHardcoded,RtlSymmetry" />
+    </RelativeLayout>
 
     <ImageButton
         android:id="@+id/likeButton"
@@ -77,8 +87,8 @@
         android:background="@android:color/transparent"
         android:src="@drawable/large_like_empty"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="20dp"
-        />
+        android:layout_alignParentRight="true"
+        android:paddingBottom="15dp"
+        tools:ignore="RtlHardcoded,RtlSymmetry" />
 
 </RelativeLayout>
