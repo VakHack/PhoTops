@@ -7,8 +7,8 @@ import android.widget.Toast;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.photops.Models.Photo.Item;
-import com.example.photops.Models.Photo.ItemsList;
+import com.example.photops.Models.Items.Item;
+import com.example.photops.Models.Items.ItemsList;
 import com.example.photops.Models.Storage.Storage;
 import com.example.photops.Models.Network.ItemsGetter;
 import com.example.photops.Models.Storage.SharedPrefsStorage;
@@ -36,26 +36,25 @@ public class MultiPhotoPresenter extends PhotoPresenter {
     public MultiPhotoPresenter(Context context, FragmentSwapper swapper,
                                NetworkCoordinator networkCoordinator, Storage storage) {
         super(context, swapper, networkCoordinator, storage);
+
+        itemsGetter = networkCoordinator.getClient().create(ItemsGetter.class);
     }
 
     @Override
     public void setView(View root){
-        recyclerView = root.findViewById(R.id.recyclerView);
-    }
-
-    @Override
-    public void present(){
-        itemsGetter = networkCoordinator.getClient().create(ItemsGetter.class);
-
+        //setting an click listener for individual photo - to send us to single fragmnet
         photoClickListener = (photo, imageView) -> {
             storage.setActivePhoto(photo);
             swapper.swap();
         };
 
+        //init recyclerView and its components
+        recyclerView = root.findViewById(R.id.recyclerView);
+        adapter = new PhotoAdapter(new ArrayList<>(), context,
+                photoClickListener, new SharedPrefsStorage(context));
+        recyclerView.setAdapter(adapter);
         GridLayoutManager layoutManager = new GridLayoutManager(context, 2);
         recyclerView.setLayoutManager(layoutManager);
-        adapter = new PhotoAdapter(new ArrayList<>(), context, photoClickListener, new SharedPrefsStorage(context));
-        recyclerView.setAdapter(adapter);
         recyclerView.smoothScrollToPosition(0);
 
         recyclerView.addOnScrollListener(new RecyclerViewScroller(layoutManager) {
@@ -65,6 +64,10 @@ public class MultiPhotoPresenter extends PhotoPresenter {
             }
         });
 
+    }
+
+    @Override
+    public void present(){
         loadPhotos();
     }
 
@@ -73,18 +76,28 @@ public class MultiPhotoPresenter extends PhotoPresenter {
             .enqueue(new Callback<ItemsList>() {
                 @Override
                 public void onResponse(Call<ItemsList> call, Response<ItemsList> response) {
-                    List<Item> photos = response.body().getItems();
-                    page++;
-                    adapter.addPhotos(photos);
-                    recyclerView.setAdapter(adapter);
+                    List<Item> photos;
+                    if (response.body() != null) {
+                        photos = response.body().getItems();
+
+                        //adding each photo to its relevant place on grid
+                        page++;
+                        adapter.addPhotos(photos);
+                        recyclerView.setAdapter(adapter);
+                    }
+                    else showFailureToast();
                 }
 
                 @Override
                 public void onFailure(Call<ItemsList> call, Throwable t) {
-                    Toast.makeText(context, "Failed to fetch photos",
-                            Toast.LENGTH_LONG).show();
+                    showFailureToast();
                 }
             });
 
+    }
+
+    private void showFailureToast(){
+        Toast.makeText(context, "Failed to fetch photos",
+                Toast.LENGTH_LONG).show();
     }
 }

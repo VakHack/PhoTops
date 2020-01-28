@@ -13,8 +13,8 @@ import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.photops.Models.Photo.Item;
-import com.example.photops.Models.Photo.GetPhotoUrlBuilder;
+import com.example.photops.Models.Items.Item;
+import com.example.photops.Models.Items.GurushotsPhotoUrlBuilder;
 import com.example.photops.Models.Storage.Storage;
 import com.example.photops.R;
 import com.squareup.picasso.Picasso;
@@ -45,9 +45,9 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
 
         public ViewHolder(View view) {
             super(view);
+            //init the vies per each individual holder
             gridImage = view.findViewById(R.id.gridImage);
             gridImage.getLayoutParams().height = HOLDER_HEIGHT;
-
             likeIndicator =  view.findViewById(R.id.likeIndicator);
             numOfLikes =  view.findViewById(R.id.numOfLikes);
             photoBy =  view.findViewById(R.id.photoBy);
@@ -64,8 +64,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
                 listener.photoClicked(photos.get(holder.getAdapterPosition()),(ImageView)v));
 
         //setting the picture width parameter, so we could cut the picture on picasso
-        //accordingly - in order to get a faster downloading
-        //(the height is a hard-coded size)
+        //accordingly - dynamically fitting all screen sizes (the height is a hard-coded size)
         DisplayMetrics displaymetrics = new DisplayMetrics();
         ((Activity)context)
                 .getWindowManager()
@@ -75,7 +74,7 @@ public class PhotoAdapter extends RecyclerView.Adapter<PhotoAdapter.ViewHolder> 
 
         //calling the relevant photo into the view with picasso
         Picasso.with(context)
-                .load(GetPhotoUrlBuilder.build(photo))
+                .load(GurushotsPhotoUrlBuilder.build(photo))
                 .resize(holderWidth, HOLDER_HEIGHT)
                 .centerCrop()
                 .into(holder.gridImage, new com.squareup.picasso.Callback() {

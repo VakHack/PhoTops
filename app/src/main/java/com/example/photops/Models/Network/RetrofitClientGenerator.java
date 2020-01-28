@@ -5,12 +5,12 @@ import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ClientHandler {
+public class RetrofitClientGenerator {
     private Retrofit retrofit;
     private Interceptor interceptor;
     private String baseUrl;
 
-    public ClientHandler(String baseUrl, Interceptor interceptor) {
+    public RetrofitClientGenerator(String baseUrl, Interceptor interceptor) {
         this.baseUrl = baseUrl;
         this.interceptor = interceptor;
 

@@ -26,7 +26,9 @@ public class MainActivity extends FragmentActivity {
     }
 
     private void runMultiPhotoFragment(){
-        getSupportFragmentManager().beginTransaction()
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setCustomAnimations(android.R.animator.fade_in, android.R.animator.fade_out)
                 .add(R.id.container, new MultiPhotoFragment())
                 .commit();
     }

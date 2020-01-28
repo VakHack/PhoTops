@@ -9,7 +9,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.photops.Models.Photo.GetPhotoUrlBuilder;
+import com.example.photops.Models.Items.GurushotsPhotoUrlBuilder;
 import com.example.photops.Models.Storage.Storage;
 import com.example.photops.Models.Network.NetworkCoordinator;
 import com.example.photops.Presenters.PhotoPresenter;
@@ -39,7 +39,7 @@ public class SinglePhotoPresenter extends PhotoPresenter {
         TextView title = root.findViewById(R.id.photoTitle);
         title.setText(titleText);
 
-        String dateText = "Creation date: " + storage.getActivePhoto().getUploadDate();
+        String dateText = "Added: " + storage.getActivePhoto().getUploadDate();
         TextView date = root.findViewById(R.id.date);
         date.setText(dateText);
 
@@ -67,7 +67,7 @@ public class SinglePhotoPresenter extends PhotoPresenter {
 
         //set the picture to be on N * screen height
         Picasso.with(context)
-                .load(GetPhotoUrlBuilder.build(storage.getActivePhoto()))
+                .load(GurushotsPhotoUrlBuilder.build(storage.getActivePhoto()))
                 .resize(screenWidth, (int)(screenHeight * REQUIRED_IMG_HEIGHT))
                 .centerCrop()
                 .into(image, new com.squareup.picasso.Callback() {

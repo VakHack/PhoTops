@@ -3,7 +3,7 @@ package com.example.photops.Models.Storage;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.photops.Models.Photo.Item;
+import com.example.photops.Models.Items.Item;
 import com.google.gson.Gson;
 
 public class SharedPrefsStorage extends Storage {

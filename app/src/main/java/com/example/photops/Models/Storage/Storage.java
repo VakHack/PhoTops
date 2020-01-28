@@ -2,7 +2,7 @@ package com.example.photops.Models.Storage;
 
 import android.content.Context;
 
-import com.example.photops.Models.Photo.Item;
+import com.example.photops.Models.Items.Item;
 
 //separating between the current implementation (shared prefs) to its interface
 public abstract class Storage {
@@ -12,8 +12,11 @@ public abstract class Storage {
         this.context = context;
     }
 
+    //saving the photo currently being displayed on storage
     public abstract void setActivePhoto(Item photo);
     public abstract Item getActivePhoto();
+
+    //saving the user "like" data
     public abstract void toggleLikePhoto(Item photo);
     public abstract boolean isPhotoLiked(Item photo);
 }

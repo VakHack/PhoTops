@@ -3,14 +3,12 @@ package com.example.photops.Presenters;
 import android.content.Context;
 import android.view.View;
 
-import com.example.photops.Models.Storage.Storage;
 import com.example.photops.Models.Network.NetworkCoordinator;
+import com.example.photops.Models.Storage.Storage;
 import com.example.photops.UI.FragmentSwapper;
 
-import java.io.Serializable;
-
-public abstract class PhotoPresenter implements Serializable {
-    protected transient Context context;
+public abstract class PhotoPresenter {
+    protected Context context;
     protected FragmentSwapper swapper;
     protected NetworkCoordinator networkCoordinator;
     protected Storage storage;

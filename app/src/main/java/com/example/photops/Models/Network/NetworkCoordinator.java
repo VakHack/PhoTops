@@ -4,14 +4,14 @@ import retrofit2.Retrofit;
 
 public class NetworkCoordinator {
     private InterceptorImp interceptor;
-    private ClientHandler clientHandler;
+    private RetrofitClientGenerator retrofitClientGenerator;
 
     public NetworkCoordinator(APIParams params) {
         interceptor = new InterceptorImp(params);
-        clientHandler = new ClientHandler(params.getBaseUrl(), interceptor);
+        retrofitClientGenerator = new RetrofitClientGenerator(params.getBaseUrl(), interceptor);
     }
 
     public Retrofit getClient() {
-        return clientHandler.getClient();
+        return retrofitClientGenerator.getClient();
     }
 }

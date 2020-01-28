@@ -1,6 +1,6 @@
 package com.example.photops.Models.Network;
 
-import com.example.photops.Models.Photo.ItemsList;
+import com.example.photops.Models.Items.ItemsList;
 
 import retrofit2.Call;
 import retrofit2.http.POST;

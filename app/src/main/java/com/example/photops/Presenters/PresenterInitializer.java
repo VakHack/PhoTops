@@ -1,18 +1,16 @@
 package com.example.photops.Presenters;
 
 import android.content.Context;
-import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.example.photops.Models.Storage.SharedPrefsStorage;
-import com.example.photops.Models.Storage.Storage;
 import com.example.photops.Models.Network.APIParams;
 import com.example.photops.Models.Network.NetworkCoordinator;
+import com.example.photops.Models.Storage.SharedPrefsStorage;
+import com.example.photops.Models.Storage.Storage;
 import com.example.photops.Presenters.MultiPhoto.MultiPhotoFragment;
 import com.example.photops.Presenters.MultiPhoto.MultiPhotoPresenter;
-import com.example.photops.Presenters.PhotoPresenter;
 import com.example.photops.Presenters.SinglePhoto.SinglePhotoFragment;
 import com.example.photops.Presenters.SinglePhoto.SinglePhotoPresenter;
 import com.example.photops.R;
@@ -23,7 +21,7 @@ public class PresenterInitializer {
     private FragmentManager fragmentManager;
     private boolean isMulti;
 
-    //hard-coding the given api headers and params for later use
+    //hard-coding the given api headers and params
     private final String MEMBER_ID = "2a49ab04b1534574e578a08b8f9d7441";
     private final String GET_LIKES = "true";
     private final String LIMIT = "50";
@@ -57,7 +55,7 @@ public class PresenterInitializer {
         FragmentSwapper multiFragmentSwapper = new FragmentSwapper(fragment, fragmentManager, R.id.container);
         FragmentSwapper singleFragmentSwapper = new FragmentSwapper(fragment, fragmentManager, R.id.container);
 
-        //testing if the requested presenter is multi or single, and creating accordingly
+        //testing if the requested presenter is multi or single, and initializing it accordingly
         return isMulti ? new MultiPhotoPresenter(context, singleFragmentSwapper, networkCoordinator, storage)
                         : new SinglePhotoPresenter(context, multiFragmentSwapper, networkCoordinator, storage);
     }
